@@ -14,6 +14,17 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("NOTES"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () async {
+              final description =
+                  await Navigator.pushNamed(context, "/create-note");
+              if (description != null) notes.add(description as String);
+              setState(() {});
+            },
+          )
+        ],
       ),
       body: notes.length == 0
           ? Center(
@@ -47,15 +58,15 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final description =
-              await Navigator.pushNamed(context, "/create-note");
-          if (description != null) notes.add(description as String);
-          setState(() {});
-        },
-        child: Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     final description =
+      //         await Navigator.pushNamed(context, "/create-note");
+      //     if (description != null) notes.add(description as String);
+      //     setState(() {});
+      //   },
+      //   child: Icon(Icons.add),
+      // ),
     );
   }
 }
